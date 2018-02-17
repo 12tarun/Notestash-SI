@@ -1,0 +1,10 @@
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\NotestashUserDataAccess.dll.config
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\NotestashUserDataAccess.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\NotestashUserDataAccess.pdb
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\EntityFramework.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\EntityFramework.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\obj\Debug\NotestashUserDataAccess.csprojResolveAssemblyReference.cache
+C:\Projects\Notestash-SI\NotestashUserDataAccess\obj\Debug\NotestashUserDataAccess.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\obj\Debug\NotestashUserDataAccess.pdb
