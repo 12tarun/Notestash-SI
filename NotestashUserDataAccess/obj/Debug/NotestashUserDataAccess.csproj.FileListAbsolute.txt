@@ -8,3 +8,12 @@ C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\EntityFramework.SqlSe
 C:\Projects\Notestash-SI\NotestashUserDataAccess\obj\Debug\NotestashUserDataAccess.csprojResolveAssemblyReference.cache
 C:\Projects\Notestash-SI\NotestashUserDataAccess\obj\Debug\NotestashUserDataAccess.dll
 C:\Projects\Notestash-SI\NotestashUserDataAccess\obj\Debug\NotestashUserDataAccess.pdb
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Net.Http.Formatting.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Cors.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Http.Cors.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Http.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Net.Http.Formatting.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Http.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Http.Cors.xml

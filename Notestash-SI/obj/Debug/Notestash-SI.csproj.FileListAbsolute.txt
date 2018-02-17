@@ -182,3 +182,6 @@ C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Http.Owin.xml
 C:\Projects\Notestash-SI\Notestash-SI\obj\Debug\Notestash-SI.csprojResolveAssemblyReference.cache
 C:\Projects\Notestash-SI\Notestash-SI\obj\Debug\Notestash-SI.dll
 C:\Projects\Notestash-SI\Notestash-SI\obj\Debug\Notestash-SI.pdb
+C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Cors.dll
+C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Http.Cors.dll
+C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Http.Cors.xml
