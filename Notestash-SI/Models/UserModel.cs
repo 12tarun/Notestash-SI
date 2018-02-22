@@ -81,6 +81,7 @@ namespace Notestash_SI.Models
             }
             catch (Exception ex)
             {
+              //  exceptionmes = ex.Message;
                 return false;
             }
         }

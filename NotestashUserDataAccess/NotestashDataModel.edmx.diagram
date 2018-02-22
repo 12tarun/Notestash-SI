@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71c5b5cc4a7d4d3986c6d47615e74017" Name="Diagram1" ZoomLevel="18">
+        <EntityTypeShape EntityType="Model.tblCategory" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblComment" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblDislike" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblDownload" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblHistory" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblLike" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblNote" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblPreference" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblTemplate" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblUser" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.tblUserStatu" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_tblPreferences_tblCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblComment_tblComment" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblDislike_tblDislike" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblDownload_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblHistory_tblHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblLike_tblLike" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblNotes_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblPreferences_tblPreferences" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblTemplate_tblUser" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_tblUser_tblUserStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.tblJoinCategoryNote" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

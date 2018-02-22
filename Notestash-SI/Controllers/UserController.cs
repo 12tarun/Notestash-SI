@@ -17,6 +17,7 @@ namespace Notestash_SI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Model State Invalid");
 
             UserModel ob = new UserModel();
+            //use out for exceptions
             bool created = ob.Create(objUser);
 
             if (created)
