@@ -33,7 +33,6 @@ namespace NotestashUserDataAccess
         public string Password { get; set; }
         public byte[] Salt { get; set; }
         public byte[] ProfilePicture { get; set; }
-        public int Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblComment> tblComments { get; set; }
@@ -51,6 +50,5 @@ namespace NotestashUserDataAccess
         public virtual ICollection<tblPreference> tblPreferences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTemplate> tblTemplates { get; set; }
-        public virtual tblUserStatu tblUserStatu { get; set; }
     }
 }

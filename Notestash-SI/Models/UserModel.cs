@@ -54,20 +54,21 @@ namespace Notestash_SI.Models
 
             try
             {
-                tblUserData objTblUser = new tblUserData();
+                tblUser objTblUser = new tblUser();
                 objTblUser.Id = objUser.Id;
                 objTblUser.FullName = objUser.FullName;
                 objTblUser.Password = hashedPassword;
                 objTblUser.Email = objUser.Email;
                 objTblUser.Salt = salt;
+                objTblUser.ProfilePicture = null;
 
-                using (NotestashUserDataBaseEntities db = new NotestashUserDataBaseEntities())
+                using (Notestash_DatabaseEntities db = new Notestash_DatabaseEntities())
                 {
-                    var existingUser = db.tblUserDatas.FirstOrDefault(e => e.Email.Equals(objUser.Email));
+                    var existingUser = db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email));
 
                     if (existingUser == null)
                     {
-                        db.tblUserDatas.Add(objTblUser);
+                        db.tblUsers.Add(objTblUser);
                         db.SaveChanges();
 
                         return true;

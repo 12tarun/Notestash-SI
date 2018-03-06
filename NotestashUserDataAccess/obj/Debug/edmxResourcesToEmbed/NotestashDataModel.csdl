@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoteId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblPreferences" Relationship="Self.FK_tblPreferences_tblCategory" FromRole="tblCategory" ToRole="tblPreferences" />
+    <NavigationProperty Name="tblNotes" Relationship="Self.tblJoinCategoryNote" FromRole="tblCategory" ToRole="tblNotes" />
+  </EntityType>
+  <EntityType Name="tblComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NoteId" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblComment_tblComment" FromRole="tblComment" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblDislike">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DislikedNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblDislike_tblDislike" FromRole="tblDislike" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblDownload">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DownloadedNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblDownload_tblUser" FromRole="tblDownload" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblHistory_tblHistory" FromRole="tblHistory" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblLike">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LikedNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblLike_tblLike" FromRole="tblLike" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblNote">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NoteName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoteContent" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DownloadNumbers" Type="Int32" Nullable="false" />
+    <Property Name="LikeNumbers" Type="Int32" Nullable="false" />
+    <Property Name="CommentNumbers" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblNotes_tblUser" FromRole="tblNotes" ToRole="tblUser" />
+    <NavigationProperty Name="tblCategories" Relationship="Self.tblJoinCategoryNote" FromRole="tblNotes" ToRole="tblCategory" />
+  </EntityType>
+  <EntityType Name="tblPreference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="tblCategory" Relationship="Self.FK_tblPreferences_tblCategory" FromRole="tblPreferences" ToRole="tblCategory" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblPreferences_tblPreferences" FromRole="tblPreferences" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Template" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoteId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblUser" Relationship="Self.FK_tblTemplate_tblUser" FromRole="tblTemplate" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salt" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProfilePicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="tblComments" Relationship="Self.FK_tblComment_tblComment" FromRole="tblUser" ToRole="tblComment" />
+    <NavigationProperty Name="tblDislikes" Relationship="Self.FK_tblDislike_tblDislike" FromRole="tblUser" ToRole="tblDislike" />
+    <NavigationProperty Name="tblDownloads" Relationship="Self.FK_tblDownload_tblUser" FromRole="tblUser" ToRole="tblDownload" />
+    <NavigationProperty Name="tblHistories" Relationship="Self.FK_tblHistory_tblHistory" FromRole="tblUser" ToRole="tblHistory" />
+    <NavigationProperty Name="tblLikes" Relationship="Self.FK_tblLike_tblLike" FromRole="tblUser" ToRole="tblLike" />
+    <NavigationProperty Name="tblNotes" Relationship="Self.FK_tblNotes_tblUser" FromRole="tblUser" ToRole="tblNotes" />
+    <NavigationProperty Name="tblPreferences" Relationship="Self.FK_tblPreferences_tblPreferences" FromRole="tblUser" ToRole="tblPreferences" />
+    <NavigationProperty Name="tblTemplates" Relationship="Self.FK_tblTemplate_tblUser" FromRole="tblUser" ToRole="tblTemplate" />
+  </EntityType>
+  <EntityType Name="tblUserStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblPreferences_tblCategory">
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+    <End Role="tblPreferences" Type="Self.tblPreference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblPreferences">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblComment_tblComment">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblComment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDislike_tblDislike">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblDislike" Type="Self.tblDislike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblDislike">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDownload_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblDownload" Type="Self.tblDownload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblDownload">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblHistory_tblHistory">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblHistory">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLike_tblLike">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblLike" Type="Self.tblLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLike">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNotes_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblNotes" Type="Self.tblNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblNotes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPreferences_tblPreferences">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblPreferences" Type="Self.tblPreference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblPreferences">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTemplate_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblTemplate" Type="Self.tblTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblTemplate">
+        <PropertyRef Name="NoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblJoinCategoryNote">
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="*" />
+    <End Role="tblNotes" Type="Self.tblNote" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Notestash_DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+    <EntitySet Name="tblComments" EntityType="Self.tblComment" />
+    <EntitySet Name="tblDislikes" EntityType="Self.tblDislike" />
+    <EntitySet Name="tblDownloads" EntityType="Self.tblDownload" />
+    <EntitySet Name="tblHistories" EntityType="Self.tblHistory" />
+    <EntitySet Name="tblLikes" EntityType="Self.tblLike" />
+    <EntitySet Name="tblNotes" EntityType="Self.tblNote" />
+    <EntitySet Name="tblPreferences" EntityType="Self.tblPreference" />
+    <EntitySet Name="tblTemplates" EntityType="Self.tblTemplate" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <EntitySet Name="tblUserStatus1" EntityType="Model.tblUserStatus" />
+    <AssociationSet Name="FK_tblPreferences_tblCategory" Association="Self.FK_tblPreferences_tblCategory">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblPreferences" EntitySet="tblPreferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblComment_tblComment" Association="Self.FK_tblComment_tblComment">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblComment" EntitySet="tblComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDislike_tblDislike" Association="Self.FK_tblDislike_tblDislike">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblDislike" EntitySet="tblDislikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDownload_tblUser" Association="Self.FK_tblDownload_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblDownload" EntitySet="tblDownloads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblHistory_tblHistory" Association="Self.FK_tblHistory_tblHistory">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblHistory" EntitySet="tblHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLike_tblLike" Association="Self.FK_tblLike_tblLike">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblLike" EntitySet="tblLikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNotes_tblUser" Association="Self.FK_tblNotes_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblNotes" EntitySet="tblNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPreferences_tblPreferences" Association="Self.FK_tblPreferences_tblPreferences">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblPreferences" EntitySet="tblPreferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTemplate_tblUser" Association="Self.FK_tblTemplate_tblUser">
+      <End Role="tblUser" EntitySet="tblUsers" />
+      <End Role="tblTemplate" EntitySet="tblTemplates" />
+    </AssociationSet>
+    <AssociationSet Name="tblJoinCategoryNote" Association="Self.tblJoinCategoryNote">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblNotes" EntitySet="tblNotes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

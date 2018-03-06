@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tblCategory">
           <Key>
             <PropertyRef Name="Id" />
@@ -104,7 +114,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Salt" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProfilePicture" Type="varbinary(max)" />
-          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserStatus">
           <Key>
@@ -245,19 +254,8 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblUser_tblUserStatus">
-          <End Role="tblUserStatus" Type="Self.tblUserStatus" Multiplicity="1" />
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUserStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblUser">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblComment" EntityType="Self.tblComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDislike" EntityType="Self.tblDislike" Schema="dbo" store:Type="Tables" />
@@ -319,16 +317,22 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblTemplate" EntitySet="tblTemplate" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblUserStatus" Association="Self.FK_tblUser_tblUserStatus">
-            <End Role="tblUserStatus" EntitySet="tblUserStatus" />
-            <End Role="tblUser" EntitySet="tblUser" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="tblCategory">
           <Key>
             <PropertyRef Name="Id" />
@@ -430,7 +434,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Salt" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProfilePicture" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblComments" Relationship="Self.FK_tblComment_tblComment" FromRole="tblUser" ToRole="tblComment" />
           <NavigationProperty Name="tblDislikes" Relationship="Self.FK_tblDislike_tblDislike" FromRole="tblUser" ToRole="tblDislike" />
           <NavigationProperty Name="tblDownloads" Relationship="Self.FK_tblDownload_tblUser" FromRole="tblUser" ToRole="tblDownload" />
@@ -439,15 +442,13 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <NavigationProperty Name="tblNotes" Relationship="Self.FK_tblNotes_tblUser" FromRole="tblUser" ToRole="tblNotes" />
           <NavigationProperty Name="tblPreferences" Relationship="Self.FK_tblPreferences_tblPreferences" FromRole="tblUser" ToRole="tblPreferences" />
           <NavigationProperty Name="tblTemplates" Relationship="Self.FK_tblTemplate_tblUser" FromRole="tblUser" ToRole="tblTemplate" />
-          <NavigationProperty Name="tblUserStatu" Relationship="Self.FK_tblUser_tblUserStatus" FromRole="tblUser" ToRole="tblUserStatus" />
         </EntityType>
-        <EntityType Name="tblUserStatu">
+        <EntityType Name="tblUserStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblUsers" Relationship="Self.FK_tblUser_tblUserStatus" FromRole="tblUserStatus" ToRole="tblUser" />
         </EntityType>
         <Association Name="FK_tblPreferences_tblCategory">
           <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
@@ -557,23 +558,12 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblUser_tblUserStatus">
-          <End Role="tblUserStatus" Type="Self.tblUserStatu" Multiplicity="1" />
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUserStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblUser">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="tblJoinCategoryNote">
           <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="*" />
           <End Role="tblNotes" Type="Self.tblNote" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Notestash_DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
           <EntitySet Name="tblComments" EntityType="Self.tblComment" />
           <EntitySet Name="tblDislikes" EntityType="Self.tblDislike" />
@@ -584,7 +574,7 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <EntitySet Name="tblPreferences" EntityType="Self.tblPreference" />
           <EntitySet Name="tblTemplates" EntityType="Self.tblTemplate" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-          <EntitySet Name="tblUserStatus" EntityType="Self.tblUserStatu" />
+          <EntitySet Name="tblUserStatus1" EntityType="Model.tblUserStatus" />
           <AssociationSet Name="FK_tblPreferences_tblCategory" Association="Self.FK_tblPreferences_tblCategory">
             <End Role="tblCategory" EntitySet="tblCategories" />
             <End Role="tblPreferences" EntitySet="tblPreferences" />
@@ -621,10 +611,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblTemplate" EntitySet="tblTemplates" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblUserStatus" Association="Self.FK_tblUser_tblUserStatus">
-            <End Role="tblUserStatus" EntitySet="tblUserStatus" />
-            <End Role="tblUser" EntitySet="tblUsers" />
-          </AssociationSet>
           <AssociationSet Name="tblJoinCategoryNote" Association="Self.tblJoinCategoryNote">
             <End Role="tblCategory" EntitySet="tblCategories" />
             <End Role="tblNotes" EntitySet="tblNotes" />
@@ -636,6 +622,17 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Notestash_DatabaseEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblCategories">
             <EntityTypeMapping TypeName="Model.tblCategory">
               <MappingFragment StoreEntitySet="tblCategory">
@@ -733,12 +730,11 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblUserStatus">
-            <EntityTypeMapping TypeName="Model.tblUserStatu">
+          <EntitySetMapping Name="tblUserStatus1">
+            <EntityTypeMapping TypeName="Model.tblUserStatus">
               <MappingFragment StoreEntitySet="tblUserStatus">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

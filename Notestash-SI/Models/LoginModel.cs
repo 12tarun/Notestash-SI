@@ -23,9 +23,9 @@ namespace Notestash_SI.Models
         {
             try
             {
-                using (NotestashUserDataBaseEntities db = new NotestashUserDataBaseEntities())
+                using (Notestash_DatabaseEntities db = new Notestash_DatabaseEntities())
                 {
-                    var user = db.tblUserDatas.FirstOrDefault(e => e.Email.Equals(objUser.Email));
+                    var user = db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email));
 
                     var sha384Factory = HmacFactory;
 
@@ -48,7 +48,7 @@ namespace Notestash_SI.Models
 
 
                     var userCredentials =
-                        db.tblUserDatas.FirstOrDefault(e => e.Email.Equals(objUser.Email) && e.Password.Equals(hashedPassword));
+                        db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email) && e.Password.Equals(hashedPassword));
 
                     if (userCredentials != null)
                     {

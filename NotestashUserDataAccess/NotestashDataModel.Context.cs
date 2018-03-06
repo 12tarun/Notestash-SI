@@ -25,6 +25,7 @@ namespace NotestashUserDataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblCategory> tblCategories { get; set; }
         public virtual DbSet<tblComment> tblComments { get; set; }
         public virtual DbSet<tblDislike> tblDislikes { get; set; }
@@ -35,6 +36,6 @@ namespace NotestashUserDataAccess
         public virtual DbSet<tblPreference> tblPreferences { get; set; }
         public virtual DbSet<tblTemplate> tblTemplates { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
-        public virtual DbSet<tblUserStatu> tblUserStatus { get; set; }
+        public virtual DbSet<tblUserStatus> tblUserStatus1 { get; set; }
     }
 }

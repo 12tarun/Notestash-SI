@@ -12,18 +12,9 @@ namespace NotestashUserDataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class tblUserStatu
+    public partial class tblUserStatus
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblUserStatu()
-        {
-            this.tblUsers = new HashSet<tblUser>();
-        }
-    
         public int Id { get; set; }
         public string Status { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblUser> tblUsers { get; set; }
     }
 }
