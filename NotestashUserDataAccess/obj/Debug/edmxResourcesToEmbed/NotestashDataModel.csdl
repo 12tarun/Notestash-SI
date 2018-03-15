@@ -119,13 +119,8 @@
     <NavigationProperty Name="tblNotes" Relationship="Self.FK_tblNotes_tblUser" FromRole="tblUser" ToRole="tblNotes" />
     <NavigationProperty Name="tblPreferences" Relationship="Self.FK_tblPreferences_tblPreferences" FromRole="tblUser" ToRole="tblPreferences" />
     <NavigationProperty Name="tblTemplates" Relationship="Self.FK_tblTemplate_tblUser" FromRole="tblUser" ToRole="tblTemplate" />
-  </EntityType>
-  <EntityType Name="tblUserStatus">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ActivationCode" Type="Guid" />
+    <Property Name="IsEmailVerified" Type="Int32" />
   </EntityType>
   <Association Name="FK_tblPreferences_tblCategory">
     <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
@@ -251,7 +246,6 @@
     <EntitySet Name="tblPreferences" EntityType="Self.tblPreference" />
     <EntitySet Name="tblTemplates" EntityType="Self.tblTemplate" />
     <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-    <EntitySet Name="tblUserStatus1" EntityType="Model.tblUserStatus" />
     <AssociationSet Name="FK_tblPreferences_tblCategory" Association="Self.FK_tblPreferences_tblCategory">
       <End Role="tblCategory" EntitySet="tblCategories" />
       <End Role="tblPreferences" EntitySet="tblPreferences" />
@@ -292,5 +286,46 @@
       <End Role="tblCategory" EntitySet="tblCategories" />
       <End Role="tblNotes" EntitySet="tblNotes" />
     </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

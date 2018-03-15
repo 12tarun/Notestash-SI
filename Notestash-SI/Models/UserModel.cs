@@ -27,8 +27,12 @@ namespace Notestash_SI.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
+    //  [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Required]
+        public int status { get; set; }
 
         public bool Create(UserModel objUser)
         {
