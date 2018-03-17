@@ -121,7 +121,6 @@
     <NavigationProperty Name="tblTemplates" Relationship="Self.FK_tblTemplate_tblUser" FromRole="tblUser" ToRole="tblTemplate" />
     <Property Name="ActivationCode" Type="Guid" />
     <Property Name="IsEmailVerified" Type="Int32" />
-    <NavigationProperty Name="tblAuthToken" Relationship="Model.FK_tblAuthToken_tblUser" FromRole="tblUser" ToRole="tblAuthToken" />
   </EntityType>
   <Association Name="FK_tblPreferences_tblCategory">
     <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
@@ -317,11 +316,6 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <EntitySet Name="tblAuthTokens" EntityType="Model.tblAuthToken" />
-    <AssociationSet Name="FK_tblAuthToken_tblUser" Association="Model.FK_tblAuthToken_tblUser">
-      <End Role="tblUser" EntitySet="tblUsers" />
-      <End Role="tblAuthToken" EntitySet="tblAuthTokens" />
-    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -334,26 +328,4 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
-  <EntityType Name="tblAuthToken">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="created_at" Type="DateTime" Precision="3" />
-    <Property Name="expired_at" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="tblUser" Relationship="Model.FK_tblAuthToken_tblUser" FromRole="tblAuthToken" ToRole="tblUser" />
-  </EntityType>
-  <Association Name="FK_tblAuthToken_tblUser">
-    <End Type="Model.tblUser" Role="tblUser" Multiplicity="1" />
-    <End Type="Model.tblAuthToken" Role="tblAuthToken" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="tblUser">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tblAuthToken">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

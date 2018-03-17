@@ -15,15 +15,6 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="tblAuthToken">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="token" Type="nvarchar(max)" />
-          <Property Name="created_at" Type="datetime" />
-          <Property Name="expired_at" Type="datetime" />
-        </EntityType>
         <EntityType Name="tblCategory">
           <Key>
             <PropertyRef Name="Id" />
@@ -126,18 +117,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <Property Name="ActivationCode" Type="uniqueidentifier" />
           <Property Name="IsEmailVerified" Type="int" />
         </EntityType>
-        <Association Name="FK_tblAuthToken_tblUser">
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
-          <End Role="tblAuthToken" Type="Self.tblAuthToken" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tblUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblAuthToken">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblComment_tblComment">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
@@ -303,7 +282,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblAuthToken" EntityType="Self.tblAuthToken" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblComment" EntityType="Self.tblComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDislike" EntityType="Self.tblDislike" Schema="dbo" store:Type="Tables" />
@@ -320,10 +298,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     [tblJoinCategoryNote].[CategoryId] AS [CategoryId]
     FROM [dbo].[tblJoinCategoryNote] AS [tblJoinCategoryNote]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_tblAuthToken_tblUser" Association="Self.FK_tblAuthToken_tblUser">
-            <End Role="tblUser" EntitySet="tblUser" />
-            <End Role="tblAuthToken" EntitySet="tblAuthToken" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblComment_tblComment" Association="Self.FK_tblComment_tblComment">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblComment" EntitySet="tblComment" />
@@ -494,7 +468,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <NavigationProperty Name="tblTemplates" Relationship="Self.FK_tblTemplate_tblUser" FromRole="tblUser" ToRole="tblTemplate" />
           <Property Name="ActivationCode" Type="Guid" />
           <Property Name="IsEmailVerified" Type="Int32" />
-          <NavigationProperty Name="tblAuthToken" Relationship="Model.FK_tblAuthToken_tblUser" FromRole="tblUser" ToRole="tblAuthToken" />
         </EntityType>
         <Association Name="FK_tblPreferences_tblCategory">
           <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
@@ -690,11 +663,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="tblAuthTokens" EntityType="Model.tblAuthToken" />
-          <AssociationSet Name="FK_tblAuthToken_tblUser" Association="Model.FK_tblAuthToken_tblUser">
-            <End Role="tblUser" EntitySet="tblUsers" />
-            <End Role="tblAuthToken" EntitySet="tblAuthTokens" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -707,28 +675,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="tblAuthToken">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="created_at" Type="DateTime" Precision="3" />
-          <Property Name="expired_at" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblUser" Relationship="Model.FK_tblAuthToken_tblUser" FromRole="tblAuthToken" ToRole="tblUser" />
-        </EntityType>
-        <Association Name="FK_tblAuthToken_tblUser">
-          <End Type="Model.tblUser" Role="tblUser" Multiplicity="1" />
-          <End Type="Model.tblAuthToken" Role="tblAuthToken" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tblUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblAuthToken">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -880,16 +826,6 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="tblAuthTokens">
-            <EntityTypeMapping TypeName="Model.tblAuthToken">
-              <MappingFragment StoreEntitySet="tblAuthToken">
-                <ScalarProperty Name="expired_at" ColumnName="expired_at" />
-                <ScalarProperty Name="created_at" ColumnName="created_at" />
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

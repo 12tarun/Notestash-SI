@@ -7,7 +7,13 @@ using System.Web.Http;
 
 namespace Notestash_SI.Controllers
 {
+    [Authorize]
     public class DashBoardController : ApiController
     {
+        [HttpGet]
+        public string dashBoard()
+        {
+            return "HEY!";
+        }
     }
 }

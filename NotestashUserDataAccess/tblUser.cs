@@ -52,6 +52,5 @@ namespace NotestashUserDataAccess
         public virtual ICollection<tblPreference> tblPreferences { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTemplate> tblTemplates { get; set; }
-        public virtual tblAuthToken tblAuthToken { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="16e3f20224074ed5ad9e24829efb711f" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="16e3f20224074ed5ad9e24829efb711f" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblCategory" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.tblComment" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
@@ -26,8 +26,6 @@
         <AssociationConnector Association="Model.FK_tblPreferences_tblPreferences" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_tblTemplate_tblUser" ManuallyRouted="false" />
         <AssociationConnector Association="Model.tblJoinCategoryNote" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.tblAuthToken" Width="1.5" PointX="3" PointY="18.75" />
-        <AssociationConnector Association="Model.FK_tblAuthToken_tblUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

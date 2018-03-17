@@ -12,8 +12,7 @@ namespace Notestash_SI.Controllers
     {
         [HttpPost]
         public HttpResponseMessage SignOut()
-        {
-            FormsAuthentication.SignOut();
+        {   
             return Request.CreateResponse(HttpStatusCode.OK,"Logged Out!");
         }
     }
