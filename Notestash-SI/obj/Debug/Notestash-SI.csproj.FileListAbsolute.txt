@@ -185,3 +185,9 @@ C:\Projects\Notestash-SI\Notestash-SI\obj\Debug\Notestash-SI.pdb
 C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Cors.dll
 C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Http.Cors.dll
 C:\Projects\Notestash-SI\Notestash-SI\bin\System.Web.Http.Cors.xml
+C:\Projects\Notestash-SI\Notestash-SI\bin\Microsoft.IdentityModel.Logging.dll
+C:\Projects\Notestash-SI\Notestash-SI\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Projects\Notestash-SI\Notestash-SI\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Projects\Notestash-SI\Notestash-SI\bin\Microsoft.IdentityModel.Logging.xml
+C:\Projects\Notestash-SI\Notestash-SI\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Projects\Notestash-SI\Notestash-SI\bin\System.IdentityModel.Tokens.Jwt.xml

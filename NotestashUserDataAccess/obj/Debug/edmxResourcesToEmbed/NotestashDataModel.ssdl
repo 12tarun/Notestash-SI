@@ -10,6 +10,15 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="tblAuthToken">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="token" Type="nvarchar(max)" />
+    <Property Name="created_at" Type="datetime" />
+    <Property Name="expired_at" Type="datetime" />
+  </EntityType>
   <EntityType Name="tblCategory">
     <Key>
       <PropertyRef Name="Id" />
@@ -112,6 +121,18 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     <Property Name="ActivationCode" Type="uniqueidentifier" />
     <Property Name="IsEmailVerified" Type="int" />
   </EntityType>
+  <Association Name="FK_tblAuthToken_tblUser">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblAuthToken" Type="Self.tblAuthToken" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblAuthToken">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblComment_tblComment">
     <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
     <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
@@ -277,6 +298,7 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAuthToken" EntityType="Self.tblAuthToken" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblComment" EntityType="Self.tblComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDislike" EntityType="Self.tblDislike" Schema="dbo" store:Type="Tables" />
@@ -293,6 +315,10 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     [tblJoinCategoryNote].[CategoryId] AS [CategoryId]
     FROM [dbo].[tblJoinCategoryNote] AS [tblJoinCategoryNote]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_tblAuthToken_tblUser" Association="Self.FK_tblAuthToken_tblUser">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblAuthToken" EntitySet="tblAuthToken" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblComment_tblComment" Association="Self.FK_tblComment_tblComment">
       <End Role="tblUser" EntitySet="tblUser" />
       <End Role="tblComment" EntitySet="tblComment" />

@@ -27,7 +27,6 @@ namespace Notestash_SI.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-    //  [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
@@ -81,12 +80,11 @@ namespace Notestash_SI.Models
                     {
                         return false;
                     }
-
                 }
             }
             catch (Exception ex)
             {
-              //  exceptionmes = ex.Message;
+                string message = ex.ToString();
                 return false;
             }
         }

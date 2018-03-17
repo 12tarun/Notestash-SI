@@ -17,3 +17,9 @@ C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Net.Http.Formatting.xml
 C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Http.xml
 C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.Web.Http.Cors.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Projects\Notestash-SI\NotestashUserDataAccess\bin\Debug\System.IdentityModel.Tokens.Jwt.xml

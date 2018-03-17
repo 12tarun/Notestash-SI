@@ -26,6 +26,8 @@
         <AssociationConnector Association="Model.FK_tblPreferences_tblPreferences" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_tblTemplate_tblUser" ManuallyRouted="false" />
         <AssociationConnector Association="Model.tblJoinCategoryNote" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.tblAuthToken" Width="1.5" PointX="3" PointY="18.75" />
+        <AssociationConnector Association="Model.FK_tblAuthToken_tblUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

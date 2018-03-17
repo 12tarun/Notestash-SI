@@ -17,12 +17,20 @@ namespace Notestash_SI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Model State Invalid");
 
             LoginModel ob = new LoginModel();
-            bool check = ob.Check(objUser);
+            string check = ob.Check(objUser);
 
-            if (check)
-                return Request.CreateResponse(HttpStatusCode.OK, "Welcome!");
+            if (check == "invalid")
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Invalid Credentials!");
+            }
+            else if (check == "error")
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Something Went Wrong!");
+            }
             else
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Login Failed!");
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, check);
+            }
         }
     }
 }
