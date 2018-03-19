@@ -35,6 +35,7 @@ namespace NotestashUserDataAccess
         public byte[] ProfilePicture { get; set; }
         public Nullable<System.Guid> ActivationCode { get; set; }
         public Nullable<int> IsEmailVerified { get; set; }
+        public Nullable<System.DateTime> Created_at { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblComment> tblComments { get; set; }

@@ -23,7 +23,6 @@ namespace Notestash_SI.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-
         public string Check(LoginModel objUser)
         {
             try
@@ -57,26 +56,15 @@ namespace Notestash_SI.Models
 
                     if (userCredentials != null)
                     {
-                      //  FormsAuthentication.SetAuthCookie(objUser.Email, false);
-                        //string accessToken = "";
-                        //string time = DateTime.Now.ToString("h:mm:ss tt");
-                        //string token = objUser.Email + hashedPassword + time;
-                        //using (MD5 md5Hash = MD5.Create())
-                        //{
-                        //    byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(token));
-                        //    StringBuilder sBuilder = new StringBuilder();
-                        //    for (int i = 0; i < data.Length; i++)
-                        //    {
-                        //        sBuilder.Append(data[i].ToString("x2"));
-                        //    }
-                        //    accessToken = sBuilder.ToString();
-                        //}
-
-                        //DateTime createdToken = DateTime.Now;
-                        //DateTime expiredToken = createdToken.AddDays(10);
-                        string token = createToken(objUser.Email);
-                        //return the token
-                        return token;
+                        if (userCredentials.IsEmailVerified == 0)
+                        {
+                            return "inactive";
+                        }
+                        else
+                        {
+                            string token = createToken(objUser.Email);
+                            return token;
+                        }
                     }
                     else
                     {

@@ -98,21 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NotestashDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="NotestashUserDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NotestashUserDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NotestashUserDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NotestashUserDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NotestashUserDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NotestashUserDataModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>NotestashDataModel.tt</DependentUpon>
@@ -153,15 +138,6 @@
     <Compile Include="tblUser.cs">
       <DependentUpon>NotestashDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblUserData.cs">
-      <DependentUpon>NotestashUserDataModel.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="NotestashUserDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NotestashUserDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
@@ -173,9 +149,6 @@
     </EntityDeploy>
     <None Include="NotestashDataModel.edmx.diagram">
       <DependentUpon>NotestashDataModel.edmx</DependentUpon>
-    </None>
-    <None Include="NotestashUserDataModel.edmx.diagram">
-      <DependentUpon>NotestashUserDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -189,16 +162,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NotestashDataModel.edmx</DependentUpon>
       <LastGenOutput>NotestashDataModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="NotestashUserDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NotestashUserDataModel.edmx</DependentUpon>
-      <LastGenOutput>NotestashUserDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="NotestashUserDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NotestashUserDataModel.edmx</DependentUpon>
-      <LastGenOutput>NotestashUserDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

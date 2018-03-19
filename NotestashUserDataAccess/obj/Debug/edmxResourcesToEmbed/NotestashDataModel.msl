@@ -103,6 +103,7 @@
     <EntitySetMapping Name="tblUsers">
       <EntityTypeMapping TypeName="Model.tblUser">
         <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
           <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
           <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />

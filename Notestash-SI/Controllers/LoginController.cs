@@ -27,6 +27,10 @@ namespace Notestash_SI.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Something Went Wrong!");
             }
+            else if (check == "inactive")
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Please verify your email account. Verification link has been sent to your email id.");
+            }
             else
             {
                 return Request.CreateResponse(HttpStatusCode.OK, check);

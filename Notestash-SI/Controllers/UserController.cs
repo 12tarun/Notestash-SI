@@ -19,7 +19,7 @@ namespace Notestash_SI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Model State Invalid");
 
             UserModel ob = new UserModel();
-            //use out for exceptions
+            // we can use out for exceptions.
             string created = ob.Create(objUser);
 
             if (created == "exists")
@@ -37,7 +37,7 @@ namespace Notestash_SI.Controllers
                 string passedEmail = created.Substring(0, i);
                 string passedCode = created.Substring((i + 1), sizeOfCode);
                 SendVerificationLink(passedEmail, passedCode);
-                return Request.CreateResponse(HttpStatusCode.OK, "Successful Registration! Activation Code has been sent to your email id.");
+                return Request.CreateResponse(HttpStatusCode.OK, "Successful Registration! Activation Code has been sent to your email id. Link expires in 1 day.");
             }
         }
 
@@ -80,15 +80,24 @@ namespace Notestash_SI.Controllers
             using (Notestash_DatabaseEntities db = new Notestash_DatabaseEntities())
             {
                 var activate = db.tblUsers.Where(e => e.ActivationCode == new Guid(id)).FirstOrDefault();
-                if (activate != null)
+                if(activate == null)
                 {
-                    activate.IsEmailVerified = 1;
-                    db.SaveChanges();
-                    return Request.CreateResponse(HttpStatusCode.OK, "Your Notestash account is activated!");
+                    return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Account deleted! Create Again!");
                 }
                 else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid Email id!");
+                    DateTime expire = activate.Created_at.Value.AddDays(1);
+                    DateTime present = DateTime.Now;
+                    if (present >= expire)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Link Expired! Register Again!");
+                    }
+                    else
+                    {
+                        activate.IsEmailVerified = 1;
+                        db.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK, "Your Notestash account is activated!");
+                    }
                 }
             }
         }

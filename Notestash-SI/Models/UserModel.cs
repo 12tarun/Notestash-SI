@@ -10,6 +10,7 @@ using PBKDF2 = SecurityDriven.Inferno.Kdf.PBKDF2;
 using SecurityDriven.Inferno.Extensions;
 using static SecurityDriven.Inferno.SuiteB;
 using static SecurityDriven.Inferno.Utils;
+using System.Data;
 
 namespace Notestash_SI.Models
 {
@@ -25,12 +26,12 @@ namespace Notestash_SI.Models
         [StringLength(15, MinimumLength = 6, ErrorMessage = "Password should be between 6 to 15 characters!")]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public int IsEmailVerified { get; set; }
         public Guid ActivationCode { get; set; }
+        public DateTime created_at { get; set; }
         public string Create(UserModel objUser)
         {
             var sha384Factory = HmacFactory;
@@ -64,11 +65,22 @@ namespace Notestash_SI.Models
                 objTblUser.ProfilePicture = null;
                 objTblUser.IsEmailVerified = 0;
                 objTblUser.ActivationCode = Guid.NewGuid();
+                objTblUser.Created_at = DateTime.Now;
 
                 using (Notestash_DatabaseEntities db = new Notestash_DatabaseEntities())
                 {
+                    DateTime present = DateTime.Now;
+                    var userList = db.tblUsers.Where(a=>a.IsEmailVerified==0).ToList();
+                    foreach(tblUser user in userList)
+                    {
+                        DateTime expire = user.Created_at.Value.AddDays(1);
+                        if(present >= expire)
+                        {
+                            db.tblUsers.Remove(user);
+                        }
+                    }
+                    db.SaveChanges();
                     var existingUser = db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email));
-
                     if (existingUser == null)
                     {
                         db.tblUsers.Add(objTblUser);
