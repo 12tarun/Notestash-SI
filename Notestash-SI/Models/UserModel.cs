@@ -29,11 +29,9 @@ namespace Notestash_SI.Models
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        [Required]
-        public int status { get; set; }
-
-        public bool Create(UserModel objUser)
+        public int IsEmailVerified { get; set; }
+        public Guid ActivationCode { get; set; }
+        public string Create(UserModel objUser)
         {
             var sha384Factory = HmacFactory;
             var random = new CryptoRandom();
@@ -64,6 +62,8 @@ namespace Notestash_SI.Models
                 objTblUser.Email = objUser.Email;
                 objTblUser.Salt = salt;
                 objTblUser.ProfilePicture = null;
+                objTblUser.IsEmailVerified = 0;
+                objTblUser.ActivationCode = Guid.NewGuid();
 
                 using (Notestash_DatabaseEntities db = new Notestash_DatabaseEntities())
                 {
@@ -74,18 +74,18 @@ namespace Notestash_SI.Models
                         db.tblUsers.Add(objTblUser);
                         db.SaveChanges();
 
-                        return true;
+                        return objUser.Email + " " + objTblUser.ActivationCode.ToString();
                     }
                     else
                     {
-                        return false;
+                        return "exists";
                     }
                 }
             }
             catch (Exception ex)
             {
                 string message = ex.ToString();
-                return false;
+                return "error";
             }
         }
     }
