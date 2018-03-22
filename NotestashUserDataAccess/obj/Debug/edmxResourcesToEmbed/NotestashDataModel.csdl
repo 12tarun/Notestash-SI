@@ -122,6 +122,7 @@
     <Property Name="ActivationCode" Type="Guid" />
     <Property Name="IsEmailVerified" Type="Int32" />
     <Property Name="Created_at" Type="DateTime" Precision="3" />
+    <Property Name="forgotPasswordCode" Type="Guid" />
   </EntityType>
   <Association Name="FK_tblPreferences_tblCategory">
     <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />

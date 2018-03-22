@@ -112,6 +112,7 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     <Property Name="ActivationCode" Type="uniqueidentifier" />
     <Property Name="IsEmailVerified" Type="int" />
     <Property Name="Created_at" Type="datetime" />
+    <Property Name="forgotPasswordCode" Type="uniqueidentifier" />
   </EntityType>
   <Association Name="FK_tblComment_tblComment">
     <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
