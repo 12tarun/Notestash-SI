@@ -35,6 +35,7 @@ namespace Notestash_SI.Models
         public Guid ActivationCode { get; set; }
         public DateTime created_at { get; set; }
         public Guid forgotPasswordCode { get; set; }
+        public int AdminOrUser { get; set; }
         public string Create(UserModel objUser)
         {
             var sha384Factory = HmacFactory;
@@ -69,6 +70,7 @@ namespace Notestash_SI.Models
                 objTblUser.IsEmailVerified = 0;
                 objTblUser.ActivationCode = Guid.NewGuid();
                 objTblUser.Created_at = DateTime.Now;
+                objTblUser.AdminOrUser = 1;
 
                 using (Notestash_DatabaseEntities db = new Notestash_DatabaseEntities())
                 {

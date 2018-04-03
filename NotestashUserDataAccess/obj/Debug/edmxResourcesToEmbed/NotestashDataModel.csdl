@@ -123,6 +123,8 @@
     <Property Name="IsEmailVerified" Type="Int32" />
     <Property Name="Created_at" Type="DateTime" Precision="3" />
     <Property Name="forgotPasswordCode" Type="Guid" />
+    <Property Name="AdminOrUser" Type="Int32" />
+    <NavigationProperty Name="tblRole" Relationship="Model.FK_tblUser_tblRole" FromRole="tblUser" ToRole="tblRole" />
   </EntityType>
   <Association Name="FK_tblPreferences_tblCategory">
     <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
@@ -318,6 +320,11 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="tblRoles" EntityType="Model.tblRole" />
+    <AssociationSet Name="FK_tblUser_tblRole" Association="Model.FK_tblUser_tblRole">
+      <End Role="tblRole" EntitySet="tblRoles" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -330,4 +337,24 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="tblRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblUsers" Relationship="Model.FK_tblUser_tblRole" FromRole="tblRole" ToRole="tblUser" />
+  </EntityType>
+  <Association Name="FK_tblUser_tblRole">
+    <End Type="Model.tblRole" Role="tblRole" Multiplicity="0..1" />
+    <End Type="Model.tblUser" Role="tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="AdminOrUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -31,44 +31,51 @@ namespace Notestash_SI.Models
                 {
                     var user = db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email));
 
-                    var sha384Factory = HmacFactory;
-
-                    byte[] derivedKey;
-                    string hashedPassword = null;
-                    string suppliedPassword = objUser.Password;
-
-                    byte[] passwordBytes = SafeUTF8.GetBytes(suppliedPassword);
-
-                    using (var pbkdf2 = new PBKDF2(sha384Factory, passwordBytes, user.Salt, 256 * 1000))
-                        derivedKey = pbkdf2.GetBytes(384 / 8);
-
-
-                    using (var hmac = sha384Factory())
+                    if(user == null)
                     {
-                        hmac.Key = derivedKey;
-                        hashedPassword = hmac.ComputeHash(passwordBytes).ToBase16();
-                    }
-
-
-
-                    var userCredentials =
-                        db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email) && e.Password.Equals(hashedPassword));
-
-                    if (userCredentials != null)
-                    {
-                        if (userCredentials.IsEmailVerified == 0)
-                        {
-                            return "inactive";
-                        }
-                        else
-                        {
-                            string token = createToken(objUser.Email);
-                            return token;
-                        }
+                        return "invalid";
                     }
                     else
                     {
-                        return "invalid";
+                        var sha384Factory = HmacFactory;
+
+                        byte[] derivedKey;
+                        string hashedPassword = null;
+                        string suppliedPassword = objUser.Password;
+
+                        byte[] passwordBytes = SafeUTF8.GetBytes(suppliedPassword);
+
+                        using (var pbkdf2 = new PBKDF2(sha384Factory, passwordBytes, user.Salt, 256 * 1000))
+                            derivedKey = pbkdf2.GetBytes(384 / 8);
+
+
+                        using (var hmac = sha384Factory())
+                        {
+                            hmac.Key = derivedKey;
+                            hashedPassword = hmac.ComputeHash(passwordBytes).ToBase16();
+                        }
+
+
+
+                        var userCredentials =
+                            db.tblUsers.FirstOrDefault(e => e.Email.Equals(objUser.Email) && e.Password.Equals(hashedPassword) && e.AdminOrUser == 1);
+
+                        if (userCredentials != null)
+                        {
+                            if (userCredentials.IsEmailVerified == 0)
+                            {
+                                return "inactive";
+                            }
+                            else
+                            {
+                                string token = createToken(objUser.Email);
+                                return token;
+                            }
+                        }
+                        else
+                        {
+                            return "invalid";
+                        }
                     }
                 }
             }

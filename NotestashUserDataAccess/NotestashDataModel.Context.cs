@@ -38,6 +38,7 @@ namespace NotestashUserDataAccess
         public virtual DbSet<tblPreference> tblPreferences { get; set; }
         public virtual DbSet<tblTemplate> tblTemplates { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblRole> tblRoles { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -132,6 +132,9 @@
     <Compile Include="tblPreference.cs">
       <DependentUpon>NotestashDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblRole.cs">
+      <DependentUpon>NotestashDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblTemplate.cs">
       <DependentUpon>NotestashDataModel.tt</DependentUpon>
     </Compile>

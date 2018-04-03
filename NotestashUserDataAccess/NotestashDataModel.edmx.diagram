@@ -26,6 +26,8 @@
         <AssociationConnector Association="Model.FK_tblPreferences_tblPreferences" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_tblTemplate_tblUser" ManuallyRouted="false" />
         <AssociationConnector Association="Model.tblJoinCategoryNote" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.tblRole" Width="1.5" PointX="0.75" PointY="8.25" />
+        <AssociationConnector Association="Model.FK_tblUser_tblRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
