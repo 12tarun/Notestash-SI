@@ -50,7 +50,7 @@ namespace Notestash_SI.Controllers
             var fromEmail = new MailAddress("suryakant.rocky@gmail.com", "Notestash");
             var toEmail = new MailAddress(Email);
             var fromEmailPassword = "suryasharma";
-            string subject = "Your account is successfully created!";
+            string subject = "Change Password";
             string body = "<br/><br/>Please click on the link below to activate your Notestash-Admin account." + "<br/><br/><a href='" + link + "'>" + link + "</a>";
 
             var smtp = new SmtpClient

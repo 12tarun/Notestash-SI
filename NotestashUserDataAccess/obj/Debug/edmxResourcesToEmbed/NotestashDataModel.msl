@@ -34,6 +34,7 @@
     <EntitySetMapping Name="tblDislikes">
       <EntityTypeMapping TypeName="Model.tblDislike">
         <MappingFragment StoreEntitySet="tblDislike">
+          <ScalarProperty Name="NoteId" ColumnName="NoteId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DislikedNotes" ColumnName="DislikedNotes" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -61,6 +62,7 @@
     <EntitySetMapping Name="tblLikes">
       <EntityTypeMapping TypeName="Model.tblLike">
         <MappingFragment StoreEntitySet="tblLike">
+          <ScalarProperty Name="NoteId" ColumnName="NoteId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="LikedNotes" ColumnName="LikedNotes" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />

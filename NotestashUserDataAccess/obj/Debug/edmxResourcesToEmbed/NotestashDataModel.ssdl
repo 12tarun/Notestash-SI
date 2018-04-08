@@ -34,6 +34,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DislikedNotes" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="NoteId" Type="int" />
   </EntityType>
   <EntityType Name="tblDownload">
     <Key>
@@ -68,6 +69,7 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="LikedNotes" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="NoteId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblNotes">
     <Key>
@@ -134,6 +136,18 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblComment_tblNotes">
+    <End Role="tblNotes" Type="Self.tblNotes" Multiplicity="1" />
+    <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNotes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblComment">
+        <PropertyRef Name="NoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblDislike_tblDislike">
     <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
     <End Role="tblDislike" Type="Self.tblDislike" Multiplicity="*" />
@@ -143,6 +157,18 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
       </Principal>
       <Dependent Role="tblDislike">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDislike_tblNotes">
+    <End Role="tblNotes" Type="Self.tblNotes" Multiplicity="0..1" />
+    <End Role="tblDislike" Type="Self.tblDislike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNotes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblDislike">
+        <PropertyRef Name="NoteId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -206,6 +232,18 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblLike_tblNotes">
+    <End Role="tblNotes" Type="Self.tblNotes" Multiplicity="1" />
+    <End Role="tblLike" Type="Self.tblLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNotes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblLike">
+        <PropertyRef Name="NoteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblNotes_tblUser">
     <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
     <End Role="tblNotes" Type="Self.tblNotes" Multiplicity="*" />
@@ -243,10 +281,10 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_tblTemplate_tblUser">
-    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblNotes" Type="Self.tblNotes" Multiplicity="1" />
     <End Role="tblTemplate" Type="Self.tblTemplate" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="tblUser">
+      <Principal Role="tblNotes">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="tblTemplate">
@@ -320,8 +358,16 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
       <End Role="tblUser" EntitySet="tblUser" />
       <End Role="tblComment" EntitySet="tblComment" />
     </AssociationSet>
+    <AssociationSet Name="FK_tblComment_tblNotes" Association="Self.FK_tblComment_tblNotes">
+      <End Role="tblNotes" EntitySet="tblNotes" />
+      <End Role="tblComment" EntitySet="tblComment" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblDislike_tblDislike" Association="Self.FK_tblDislike_tblDislike">
       <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblDislike" EntitySet="tblDislike" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDislike_tblNotes" Association="Self.FK_tblDislike_tblNotes">
+      <End Role="tblNotes" EntitySet="tblNotes" />
       <End Role="tblDislike" EntitySet="tblDislike" />
     </AssociationSet>
     <AssociationSet Name="FK_tblDownload_tblUser" Association="Self.FK_tblDownload_tblUser">
@@ -344,6 +390,10 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
       <End Role="tblUser" EntitySet="tblUser" />
       <End Role="tblLike" EntitySet="tblLike" />
     </AssociationSet>
+    <AssociationSet Name="FK_tblLike_tblNotes" Association="Self.FK_tblLike_tblNotes">
+      <End Role="tblNotes" EntitySet="tblNotes" />
+      <End Role="tblLike" EntitySet="tblLike" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblNotes_tblUser" Association="Self.FK_tblNotes_tblUser">
       <End Role="tblUser" EntitySet="tblUser" />
       <End Role="tblNotes" EntitySet="tblNotes" />
@@ -357,7 +407,7 @@ warning 6002: The table/view 'Notestash Database.dbo.tblJoinCategoryNote' does n
       <End Role="tblPreferences" EntitySet="tblPreferences" />
     </AssociationSet>
     <AssociationSet Name="FK_tblTemplate_tblUser" Association="Self.FK_tblTemplate_tblUser">
-      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblNotes" EntitySet="tblNotes" />
       <End Role="tblTemplate" EntitySet="tblTemplate" />
     </AssociationSet>
     <AssociationSet Name="FK_tblUser_tblRole" Association="Self.FK_tblUser_tblRole">

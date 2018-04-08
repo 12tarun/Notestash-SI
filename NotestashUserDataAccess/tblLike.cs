@@ -17,7 +17,9 @@ namespace NotestashUserDataAccess
         public int Id { get; set; }
         public string LikedNotes { get; set; }
         public int UserId { get; set; }
+        public int NoteId { get; set; }
     
         public virtual tblUser tblUser { get; set; }
+        public virtual tblNote tblNote { get; set; }
     }
 }

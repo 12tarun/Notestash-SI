@@ -19,5 +19,6 @@ namespace NotestashUserDataAccess
         public int NoteId { get; set; }
     
         public virtual tblUser tblUser { get; set; }
+        public virtual tblNote tblNote { get; set; }
     }
 }

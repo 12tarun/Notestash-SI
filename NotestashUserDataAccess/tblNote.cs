@@ -18,6 +18,10 @@ namespace NotestashUserDataAccess
         public tblNote()
         {
             this.tblCategories = new HashSet<tblCategory>();
+            this.tblComments = new HashSet<tblComment>();
+            this.tblDislikes = new HashSet<tblDislike>();
+            this.tblLikes = new HashSet<tblLike>();
+            this.tblTemplates = new HashSet<tblTemplate>();
         }
     
         public int Id { get; set; }
@@ -33,5 +37,13 @@ namespace NotestashUserDataAccess
         public virtual tblUser tblUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblCategory> tblCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblComment> tblComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblDislike> tblDislikes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblLike> tblLikes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblTemplate> tblTemplates { get; set; }
     }
 }
