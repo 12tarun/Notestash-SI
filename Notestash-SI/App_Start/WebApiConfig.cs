@@ -28,8 +28,9 @@ namespace Notestash_SI
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            EnableCorsAttribute cors = new EnableCorsAttribute("*","*","*");
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
+            
         }
     }
 }
