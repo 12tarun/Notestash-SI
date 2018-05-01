@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,7 +14,8 @@ namespace Notestash_SI.Controllers
         [HttpGet]
         public string dashBoard()
         {
-            return "HEY!";
+            var username = User.Identity.Name;
+            return username.ToString();
         }
     }
 }
