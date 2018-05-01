@@ -13,11 +13,13 @@ using PBKDF2 = SecurityDriven.Inferno.Kdf.PBKDF2;
 using SecurityDriven.Inferno.Extensions;
 using static SecurityDriven.Inferno.SuiteB;
 using static SecurityDriven.Inferno.Utils;
+using System.Web.Http.Cors;
 
 namespace Notestash_SI.Controllers
 {
     public class LoginController : ApiController
     {
+        [EnableCors("*", "*", "*")]
         [HttpPost]
         [Route("api/Login/Check")]
         public HttpResponseMessage Check(LoginModel objUser)
@@ -46,6 +48,7 @@ namespace Notestash_SI.Controllers
             }
         }
 
+        [EnableCors("*", "*", "*")]
         [HttpPost]
         [Route("api/Login/forgotPassword")]
         public HttpResponseMessage forgotPassword(forgotPassword User)
@@ -101,6 +104,7 @@ namespace Notestash_SI.Controllers
                 smtp.Send(message);
         }
 
+        [EnableCors("*", "*", "*")]
         [HttpPost]
         [Route("api/Login/changePassword/{id}")]
         public HttpResponseMessage changePassword(string id, changePassword pass)

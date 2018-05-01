@@ -7,11 +7,13 @@ using System.Web.Http;
 using Notestash_SI.Models;
 using System.Net.Mail;
 using NotestashUserDataAccess;
+using System.Web.Http.Cors;
 
 namespace Notestash_SI.Controllers
 {
     public class UserController : ApiController
     {
+        [EnableCors("*", "*", "*")]
         [HttpPost]
         public HttpResponseMessage Create(UserModel objUser)
         {
@@ -73,6 +75,7 @@ namespace Notestash_SI.Controllers
         }
 
         // GET: Verify account on clicking on activation code sent in email.
+        [EnableCors("*", "*", "*")]
         [HttpGet]
         [Route("api/User/VerifyAccount/{id}")]
         public HttpResponseMessage VerifyAccount(string id)

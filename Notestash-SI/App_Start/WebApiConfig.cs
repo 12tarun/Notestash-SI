@@ -29,7 +29,7 @@ namespace Notestash_SI
             );
 
             EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
+          //  config.EnableCors(cors);
             
         }
     }
